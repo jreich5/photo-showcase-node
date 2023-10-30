@@ -26,6 +26,7 @@ const AlbumForm = (props: AlbumFormProps) => {
   );
   const processInputChange = (e: React.FormEvent<HTMLInputElement>) => {
     let id = e.currentTarget.value;
+    console.log(e);
     if (id === "") {
       // allows the photos to be pre-populated with the first album if input is blank
       changeAlbumId("1");
@@ -41,6 +42,7 @@ const AlbumForm = (props: AlbumFormProps) => {
     <section className={["flex", "mb-12"].join(" ")}>
       <form
         className={["m-auto", "flex", "flex-col", "items-center"].join(" ")}
+        onSubmit={(e) => e.preventDefault()}
       >
         <div>
           <label
