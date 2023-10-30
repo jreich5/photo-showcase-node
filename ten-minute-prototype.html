@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Photo Test</title>
+  </head>
+  <body>
+    <input
+      id="album_id_input"
+      type="number"
+      placeholder="album_id"
+      min="1"
+      max="100"
+    />
+    <button id="search-btn">Search</button>
+
+    <h1>Photos</h1>
+    <div id="photos"></div>
+
+    <script>
+      "use strict";
+
+      function buildPhotoHTML({ id, title }) {
+        return `<p>${id}=${title}</p>`;
+      }
+
+      function buildHTML(photos) {
+        let html = "";
+        photos.forEach((photo) => {
+          html += buildPhotoHTML(photo);
+        });
+        document.querySelector("#photos").innerHTML = html;
+      }
+
+      function searchAlbums(albumId) {
+        fetch(`https://jsonplaceholder.typicode.com/photos?albumId=${albumId}`)
+          .then((res) => res.json())
+          .then(buildHTML);
+      }
+
+      document.querySelector("#search-btn").addEventListener("click", () => {
+        const albumId = document.querySelector("#album_id_input").value;
+        searchAlbums(albumId);
+      });
+    </script>
+  </body>
+</html>
