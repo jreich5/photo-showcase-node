@@ -1,12 +1,7 @@
 import React from "react";
-import { useState, useMemo, FC } from "react";
+import { useState, useMemo } from "react";
 import { IPhoto } from "../App";
 import { inputIsValid } from "../validation";
-
-interface AlbumFormProps {
-  changeAlbumId: (id: string) => void;
-  photos: IPhoto[];
-}
 
 /**
  * Takes in the array of photos and returns the number albums in the array
@@ -17,7 +12,13 @@ export const calculateNumberOfAlbums = (photos: IPhoto[]) => {
   return Array.from(new Set(photos.map(({ albumId }) => albumId))).length;
 };
 
-const AlbumForm: FC<AlbumFormProps> = ({ changeAlbumId, photos }) => {
+interface AlbumFormProps {
+  changeAlbumId: (id: string) => void;
+  photos: IPhoto[];
+}
+
+const AlbumForm = (props: AlbumFormProps) => {
+  const { changeAlbumId, photos } = props;
   const [albumId, setAlbumId] = useState("");
   const numberOfAlbums = useMemo(
     () => calculateNumberOfAlbums(photos),
