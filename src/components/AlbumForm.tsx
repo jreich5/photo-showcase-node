@@ -26,11 +26,11 @@ const AlbumForm = (props: AlbumFormProps) => {
   );
   const processInputChange = (e: React.FormEvent<HTMLInputElement>) => {
     let id = e.currentTarget.value;
-    console.log(e);
     if (id === "") {
       // allows the photos to be pre-populated with the first album if input is blank
       changeAlbumId("1");
       setAlbumId("");
+      return;
     }
     const isValidInput = inputIsValid(id, 1, numberOfAlbums);
     if (isValidInput) {

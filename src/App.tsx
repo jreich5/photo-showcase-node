@@ -41,7 +41,6 @@ function App() {
           localStorage.setItem("photos", JSON.stringify(fetchedPhotos));
         }
       } catch (e) {
-        console.error("Network error!");
         setError("Network error!");
       }
     })();
