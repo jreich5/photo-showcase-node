@@ -2,7 +2,10 @@
 
 This project is a React application to display and search for photos by a photo album id.
 
-You can view a live version of the application [here](https://jreich5.github.io/photo-showcase/).
+**Note**
+A deprecated version of this project using Bun as the JavaScript runtime and test runner can be found here: [photo-showcase](https://github.com/photo-showcase).
+
+You can view a live version of the application [here](https://jreich5.github.io/photo-showcase-node/).
 
 ![desktop-view](./images/desktop-view.png)
 ![mobile-view](./images/mobile-view.png)
@@ -20,15 +23,17 @@ You can view a live version of the application [here](https://jreich5.github.io/
 
 This Photo Showcase demonstrates a React application with several technologies:
 
-- [Bun](https://bun.sh/) for the runtime, dependency management and test runner
-- [Vite](https://vitejs.dev/) for the development server and boiler plate setup for a React + TypeScript application
-- [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) for API calls
-- [Tailwind CSS](https://tailwindcss.com/) is used to create a mobile responsive design.
-- [Figma](https://www.figma.com/) is used for creating initial mockups.
-- [GitHub Projects](https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/about-projects) board to document development tasks
-- [GitHub Pages](https://pages.github.com/) for the live site
-- [React Testing Library](https://testing-library.com/) the Bun test runner for component testing
-- [Cypress](https://www.cypress.io/) for end-to-end testing
+- [Node.js](https://nodejs.org/en) - the runtime environment
+- [npm](https://www.npmjs.com/) - dependency management
+- [Jest](https://jestjs.io/) - test runner
+- [Vite](https://vitejs.dev/) - development server and React configuration
+- [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) - API calls
+- [TailwindCSS](https://tailwindcss.com/) - styling
+- [Figma](https://www.figma.com/) - wireframing / mockups
+- [GitHub Projects](https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/about-projects) - manage Kanban cards
+- [GitHub Pages](https://pages.github.com/) - hosts live site
+- [React Testing Library](https://testing-library.com/) - component and integration testing
+- [Cypress](https://www.cypress.io/) - end-to-end testing
 
 The project features test-driven custom validation for the album id input. The site is mobile-responsive using Tailwind CSS and custom CSS. The photo API data is stored in local storage for faster data retrieval and DOM loading.
 
@@ -36,10 +41,14 @@ The project features test-driven custom validation for the album id input. The s
 
 To run the application locally, complete the following steps:
 
-1. [Install Bun](https://bun.sh/docs/installation)
 1. Clone this repository
-1. `bun install`
-1. `bun run dev`
+1. `npm install` - installs dependencies
+1. `npm run dev` - starts up dev server and runs project locally
+
+The tests can be run with the following commands:
+
+- `npm run test` - runs all unit and integration tests
+- `npm run e2e` - runs E2E tests on the live site
 
 ## Development Process
 
@@ -48,6 +57,9 @@ To run the application locally, complete the following steps:
 I started started this project by first building out a <10min [prototype](https://github.com/jreich5/photo-showcase/blob/main/ten-minute-prototype.html) in a single HTML file with JavaScript. I did this to get a quick sense of the basic functionality of the project.
 
 After completing the prototype, I decided to build out a front-end app using React+TypeScript with Vite and Bun. My goal with this build was to strike a balance between over-engineering and adhering to as many best practices as possible.
+
+**Note**
+I chose Bun as a fun challenge and for the DX. It was incredibly fast but proved too exprimental for Windows. This version uses Node, npm, and Jest.
 
 I prioritized the following considerations:
 
@@ -88,12 +100,15 @@ In the course of building this project, I encountered several blockers:
 - Getting the RTL tests to work on child components (related to API mocking)
 - Implementing pagination
 - Spotting a bug in production
+- Pivoting away from Bun
 
 It took me a bit of tinkering to understand that in order for me to render child components and test them, I needed to teardown the DOM after testing each component. I found that the `afterAll` method in the Bun test runner allowed me to call the `cleanup` method from the React Testing Library.
 
 Pagination was a significant feature I intended to implement but it wasn't part of the the MVP and had to be moved to the backlog due to time contraints.
 
 After deploying to GitHub pages, the data was not rendering. I had not tested clearing out localStorage since a much earlier stage of development and the live site was not loading data due to setting the wrong value for the state of the photos. I was able to debug this issue by throwing in alerts, then console logs while using the `vite preview` and eventually found this issue was also occuring locally.
+
+The transition of the project away from Bun involved updating various configurations in Vite and integrating Jest. While the Bun test runner API is Jest-like, there were some breaking changes in some of the matchers.
 
 ### Use of AI
 
@@ -111,14 +126,14 @@ I allowed the bun:test dependency to stay unresolved for much of the project. If
 
 The pagination feature should have been de-prioritized in favor of more test coverage.
 
-### Bun is fast and cool but documentation and online resources are harder to find
+### Bun is awesome but cutting edge isn't always worth the risk
 
-Bun and Vite are FAST but searching for solutions takes time due to the newness of the technology.
+Bun is FAST but online examples are harder to find. The experiemental nature of the technology on Windows ultimately lead me to pivot back to Node.js.
 
 ### Mocking is hard
 
-Testing in React applications in general is a new challenge. I spent a log of time attempting to mock the API data coming from my useEffect hook and ultimately had to move on. If I had used a more established project setup using Jest, the existing resources online would have been more relevant.
+Testing in React applications in general is a new challenge. I spent a fair amount of time attempting to mock the API data coming from my useEffect hook. If I had used Jest from the beginning, the existing resources online would have been more relevant and simpler to implement.
 
-### Feature difficulty is hard to predict
+### Feature development challenge is hard to predict
 
-I labeled each planned features as either low | mid | high complexity, based on a combination of prior experience and prediction of the scope of the feature. I found that I both undershot and overshot complexity for various features.
+I labeled each planned features as either "low", "mid" or "high" complexity, based on a combination of my prior experience and prediction of the scope of the feature. I found that I both undershot and overshot complexity for various features.
