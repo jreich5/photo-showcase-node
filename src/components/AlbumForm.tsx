@@ -1,12 +1,7 @@
 import React from "react";
-import { useState, useMemo, FC } from "react";
+import { useState, useMemo } from "react";
 import { IPhoto } from "../App";
 import { inputIsValid } from "../validation";
-
-interface AlbumFormProps {
-  changeAlbumId: (id: string) => void;
-  photos: IPhoto[];
-}
 
 /**
  * Takes in the array of photos and returns the number albums in the array
@@ -17,7 +12,13 @@ export const calculateNumberOfAlbums = (photos: IPhoto[]) => {
   return Array.from(new Set(photos.map(({ albumId }) => albumId))).length;
 };
 
-const AlbumForm: FC<AlbumFormProps> = ({ changeAlbumId, photos }) => {
+interface AlbumFormProps {
+  changeAlbumId: (id: string) => void;
+  photos: IPhoto[];
+}
+
+const AlbumForm = (props: AlbumFormProps) => {
+  const { changeAlbumId, photos } = props;
   const [albumId, setAlbumId] = useState("");
   const numberOfAlbums = useMemo(
     () => calculateNumberOfAlbums(photos),
@@ -29,6 +30,7 @@ const AlbumForm: FC<AlbumFormProps> = ({ changeAlbumId, photos }) => {
       // allows the photos to be pre-populated with the first album if input is blank
       changeAlbumId("1");
       setAlbumId("");
+      return;
     }
     const isValidInput = inputIsValid(id, 1, numberOfAlbums);
     if (isValidInput) {
@@ -40,6 +42,7 @@ const AlbumForm: FC<AlbumFormProps> = ({ changeAlbumId, photos }) => {
     <section className={["flex", "mb-12"].join(" ")}>
       <form
         className={["m-auto", "flex", "flex-col", "items-center"].join(" ")}
+        onSubmit={(e) => e.preventDefault()}
       >
         <div>
           <label

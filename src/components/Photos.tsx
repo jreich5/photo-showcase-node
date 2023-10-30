@@ -1,4 +1,3 @@
-import { FC } from "react";
 import Photo from "./Photo";
 import { IPhoto } from "../App";
 
@@ -7,7 +6,8 @@ interface PhotosProps {
   photos: IPhoto[];
 }
 
-const Photos: FC<PhotosProps> = ({ albumId, photos }) => {
+const Photos = (props: PhotosProps) => {
+  const { albumId, photos } = props;
   return (
     <section>
       <h2 className={["text-3xl", "mb-2"].join(" ")}>Album {albumId} Photos</h2>

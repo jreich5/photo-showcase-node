@@ -1,12 +1,11 @@
-import { FC } from "react";
-
 interface PhotoProps {
   id: number;
   title: string;
   url: string;
 }
 
-const Photo: FC<PhotoProps> = ({ id, title, url }) => {
+const Photo = (props: PhotoProps) => {
+  const { id, title, url } = props;
   return (
     <article
       className={[
