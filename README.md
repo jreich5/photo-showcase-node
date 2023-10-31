@@ -85,7 +85,7 @@ I then planned out what my component hierarchy would be using annotations in Mac
 
 After building the components, I focused on adding the the state and props to the components. This lead to creating the API calls for data fetching and optimizing performance using local storage.
 
-With the components built and the data being displayed, I focused on styling with Tailwind. Once that was completed, I focused on refactoring the code to use more explicit typing in TypeScript and refactored all my component props to use interfaces.
+With the components built and the data being displayed, I focused on styling with TailwindCSS. Once that was completed, I focused on refactoring the code to use more explicit typing in TypeScript and refactored all my component props to use interfaces.
 
 The final steps of development consisted of adding error handling for my API calls, deploying the live site and adding ent-to-end tests.
 
@@ -122,18 +122,18 @@ Building this Showcase was fun and highlighted several areas of continued growth
 
 I allowed the bun:test dependency to stay unresolved for much of the project. If I had compiled my TypeScript code sooner, I would have seen several small refactors I could have done from the beginning.
 
-### Be careful with MVP scope
+### Be careful with exceeding MVP scope
 
-The pagination feature should have been de-prioritized in favor of more test coverage.
+The pagination feature should have been de-prioritized sooner in favor of better test coverage.
 
-### Bun is awesome but cutting edge isn't always worth the risk
+### Bun is awesome, but cutting edge isn't always worth the risk
 
 Bun is FAST but online examples are harder to find. The experiemental nature of the technology on Windows ultimately lead me to pivot back to Node.js.
 
-### Mocking is hard
+### Mocking is tricky
 
 Testing in React applications in general is a new challenge. I spent a fair amount of time attempting to mock the API data coming from my useEffect hook. If I had used Jest from the beginning, the existing resources online would have been more relevant and simpler to implement.
 
-### Feature development challenge is hard to predict
+### Feature complexity estimations are very hard to predict
 
-I labeled each planned features as either "low", "mid" or "high" complexity, based on a combination of my prior experience and prediction of the scope of the feature. I found that I both undershot and overshot complexity for various features.
+I labeled each planned feature as either "low", "mid" or "high" complexity, based on a combination of my prior experience and prediction of the scope of the feature. I found that I both undershot and overshot complexity for various features throughout the development of this project.
