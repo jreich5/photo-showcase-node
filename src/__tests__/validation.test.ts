@@ -7,12 +7,6 @@ import {
 } from "../validation";
 
 describe("isANumber", () => {
-  it("should be defined", () => {
-    expect(isANumber).toBeDefined();
-  });
-  it("should return true when passed 7", () => {
-    expect(isANumber(7)).toBeTruthy();
-  });
   it("should return true when passed '7'", () => {
     expect(isANumber("7")).toBeTruthy();
   });
@@ -25,9 +19,6 @@ describe("isANumber", () => {
 });
 
 describe("isInRange", () => {
-  it("should be defined", () => {
-    expect(isInRange).toBeDefined();
-  });
   it("should return true if passed 4, 1 and 10", () => {
     expect(isInRange(4, 1, 10)).toBeTruthy();
   });
@@ -40,9 +31,6 @@ describe("isInRange", () => {
 });
 
 describe("isNotZero", () => {
-  it("should be defined", () => {
-    expect(isNotZero).toBeDefined();
-  });
   it("should return true is passed 4", () => {
     expect(isNotZero(4)).toBeTruthy();
   });
@@ -52,9 +40,6 @@ describe("isNotZero", () => {
 });
 
 describe("containsNoDecimal", () => {
-  it("should be defined", () => {
-    expect(containsNoDecimal).toBeDefined();
-  });
   it("should return true if passed '23'", () => {
     expect(containsNoDecimal("23")).toBeTruthy();
   });
@@ -70,9 +55,6 @@ describe("containsNoDecimal", () => {
 });
 
 describe("inputIsValid", () => {
-  it("should defined", () => {
-    expect(inputIsValid).toBeDefined();
-  });
   it("should return true when passed '3', 1 and 10", () => {
     expect(inputIsValid("3", 1, 10)).toBeTruthy();
   });

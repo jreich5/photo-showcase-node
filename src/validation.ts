@@ -1,4 +1,4 @@
-export const isANumber = (input: any): boolean => {
+export const isANumber = (input: string): boolean => {
   return !isNaN(Number(input));
 };
 
@@ -14,7 +14,11 @@ export const containsNoDecimal = (input: string): boolean => {
   return !input.includes(".");
 };
 
-export const inputIsValid = (input: any, min: number, max: number): boolean => {
+export const inputIsValid = (
+  input: string,
+  min: number,
+  max: number
+): boolean => {
   return (
     isANumber(input) &&
     isInRange(Number(input), min, max) &&

@@ -11,22 +11,22 @@ export interface IPhoto {
   thumbnailUrl: string;
 }
 
-/**
- * Check local storage and if photos are already saved, load them into memory
- * @returns the initial state for photos
- */
-const pullFromLocalStorage = () => {
-  const savedPhotos = localStorage.getItem("photos");
-  let initialValue;
-  if (savedPhotos === null) {
-    initialValue = [];
-  } else {
-    initialValue = JSON.parse(savedPhotos);
-  }
-  return initialValue || [];
-};
-
 function App() {
+  /**
+   * Check local storage and if photos are already saved, load them into memory
+   * @returns the initial state for photos
+   */
+  const pullFromLocalStorage = () => {
+    const savedPhotos = localStorage.getItem("photos");
+    let initialValue;
+    if (savedPhotos === null) {
+      initialValue = [];
+    } else {
+      initialValue = JSON.parse(savedPhotos);
+    }
+    return initialValue;
+  };
+
   const [albumId, setAlbumId] = useState("1");
   const [photos, setPhotos] = useState(pullFromLocalStorage);
   const [error, setError] = useState("");
@@ -34,9 +34,11 @@ function App() {
   useEffect(() => {
     (async () => {
       try {
-        const fetchedPhotos = await PhotoAPI.getAll();
+        const fetchedPhotos: IPhoto[] = await PhotoAPI.getAll();
+        const localPhotos: IPhoto[] = pullFromLocalStorage();
+
         // if the data in the API has changed, update the state and local storage
-        if (JSON.stringify(photos) !== JSON.stringify(fetchedPhotos)) {
+        if (JSON.stringify(localPhotos) !== JSON.stringify(fetchedPhotos)) {
           setPhotos(fetchedPhotos);
           localStorage.setItem("photos", JSON.stringify(fetchedPhotos));
         }

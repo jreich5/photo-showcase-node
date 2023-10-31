@@ -2,15 +2,7 @@ import React from "react";
 import { useState, useMemo } from "react";
 import { IPhoto } from "../App";
 import { inputIsValid } from "../validation";
-
-/**
- * Takes in the array of photos and returns the number albums in the array
- * @param photos
- * @returns the total number of unique album ids for a given array of photos
- */
-export const calculateNumberOfAlbums = (photos: IPhoto[]) => {
-  return Array.from(new Set(photos.map(({ albumId }) => albumId))).length;
-};
+import { calculateNumberOfAlbums } from "../utils";
 
 interface AlbumFormProps {
   changeAlbumId: (id: string) => void;
@@ -25,7 +17,7 @@ const AlbumForm = (props: AlbumFormProps) => {
     [photos]
   );
   const processInputChange = (e: React.FormEvent<HTMLInputElement>) => {
-    let id = e.currentTarget.value;
+    const id = e.currentTarget.value;
     if (id === "") {
       // allows the photos to be pre-populated with the first album if input is blank
       changeAlbumId("1");
