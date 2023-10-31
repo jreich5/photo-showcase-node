@@ -1,8 +1,9 @@
 import { render, screen, cleanup } from "@testing-library/react";
-import AlbumForm, { calculateNumberOfAlbums } from "../components/AlbumForm";
+import { calculateNumberOfAlbums } from "../utils";
+import AlbumForm from "../components/AlbumForm";
 import { photos1, photos2 } from "../mockPhotoAPIData";
 
-afterAll(() => {
+afterEach(() => {
   cleanup();
 });
 

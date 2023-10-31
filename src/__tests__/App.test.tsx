@@ -22,8 +22,10 @@ afterAll(() => {
 
 describe("App component", () => {
   it("should render", () => {
-    const h1Element = screen.getByRole("heading", { name: "Photo Showcase" });
-    expect(h1Element).toBeDefined;
+    waitFor(() => {
+      const h1Element = screen.getByRole("heading", { name: "Photo Showcase" });
+      expect(h1Element).toBeDefined();
+    });
   });
 
   it("should display a heading with album number 1", () => {
@@ -69,5 +71,37 @@ describe("App component", () => {
     await verifyAlbumIdHasNotChanged("*"); // non-numeric input
     await verifyAlbumIdHasNotChanged(" "); // non-numeric input
     await verifyAlbumIdHasNotChanged("cat"); // non-numeric input
+  });
+
+  it("should update local storage with useEffect", async () => {
+    localStorage.setItem(
+      "photos",
+      JSON.stringify([
+        {
+          albumId: 1,
+          id: 1,
+          title: "accusamus beatae ad facilis cum similique qui sunt",
+          url: "https://via.placeholder.com/600/92c952",
+          thumbnailUrl: "https://via.placeholder.com/150/92c952",
+        },
+      ])
+    );
+
+    let storagePhotos = localStorage.getItem("photos");
+    if (storagePhotos === null) {
+      storagePhotos = "[]";
+    }
+
+    expect(JSON.parse(storagePhotos).length).toBe(1);
+
+    const albumIdInput = screen.getByPlaceholderText(
+      "Enter album id"
+    ) as HTMLInputElement;
+
+    await userEvent.type(albumIdInput, "1");
+
+    storagePhotos = localStorage.getItem("photos") || "[]";
+
+    expect(JSON.parse(storagePhotos).length).toBeGreaterThan(1);
   });
 });
