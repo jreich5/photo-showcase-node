@@ -79,7 +79,7 @@ Mobile mockup:
 
 ![Mobile Mockup](./images/mobile-mockup.png)
 
-I then planned out what my component hierarchy would be using annotations in Mac Finder (the version below still contained pagination and a few mislabled props):
+I then planned out what my component hierarchy would be using annotations in Mac Preview (the version below still contained pagination and a few mislabled props):
 
 ![components](./images/components.png)
 
