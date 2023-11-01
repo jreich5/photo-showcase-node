@@ -9,7 +9,6 @@ PhotoAPI.getAll = mockPhotoAPI.mockReturnValue(Promise.resolve(photos1));
 
 beforeEach(() => {
   localStorage.clear();
-  render(<App />);
 });
 
 afterEach(() => {
@@ -22,6 +21,7 @@ afterAll(() => {
 
 describe("App component", () => {
   it("should render", () => {
+    render(<App />);
     waitFor(() => {
       const h1Element = screen.getByRole("heading", { name: "Photo Showcase" });
       expect(h1Element).toBeDefined();
@@ -29,11 +29,13 @@ describe("App component", () => {
   });
 
   it("should display a heading with album number 1", () => {
+    render(<App />);
     const h2Element = screen.getByRole("heading", { name: "Album 1 Photos" });
     expect(h2Element).toBeDefined;
   });
 
   it("should allow the album id to change", async () => {
+    render(<App />);
     const albumIdInput = screen.getByPlaceholderText(
       "Enter album id"
     ) as HTMLInputElement;
@@ -49,6 +51,7 @@ describe("App component", () => {
   });
 
   it("should not allow the album id to change with invalid input", async () => {
+    render(<App />);
     async function verifyAlbumIdHasNotChanged(keyboardInput: string) {
       const photosHeading = screen.getAllByRole("heading", {
         level: 2,
@@ -74,6 +77,7 @@ describe("App component", () => {
   });
 
   it("should update local storage with useEffect", async () => {
+    render(<App />);
     localStorage.setItem(
       "photos",
       JSON.stringify([
