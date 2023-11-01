@@ -3,7 +3,7 @@
 This project is a React application to display and search for photos by a photo album id.
 
 **Note**
-A deprecated version of this project using Bun as the JavaScript runtime and test runner can be found here: [photo-showcase](https://github.com/photo-showcase).
+A deprecated version of this project using Bun as the JavaScript runtime and test runner can be found here: [photo-showcase](https://github.com/jreich5/photo-showcase).
 
 You can view a live version of the application [here](https://jreich5.github.io/photo-showcase-node/).
 
