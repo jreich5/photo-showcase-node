@@ -1,5 +1,6 @@
 import { render, screen, cleanup, waitFor } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
+import "@testing-library/jest-dom";
 import App from "../App";
 import { PhotoAPI } from "../PhotoAPI";
 import { photos1 } from "../mockPhotoAPIData";
@@ -9,7 +10,6 @@ PhotoAPI.getAll = mockPhotoAPI.mockReturnValue(Promise.resolve(photos1));
 
 beforeEach(() => {
   localStorage.clear();
-  render(<App />);
 });
 
 afterEach(() => {
@@ -22,25 +22,28 @@ afterAll(() => {
 
 describe("App component", () => {
   it("should render", () => {
+    render(<App />);
     waitFor(() => {
       const h1Element = screen.getByRole("heading", { name: "Photo Showcase" });
-      expect(h1Element).toBeDefined();
+      expect(h1Element).toBeInTheDocument();
     });
   });
 
   it("should display a heading with album number 1", () => {
+    render(<App />);
     const h2Element = screen.getByRole("heading", { name: "Album 1 Photos" });
-    expect(h2Element).toBeDefined;
+    expect(h2Element).toBeInTheDocument();
   });
 
   it("should allow the album id to change", async () => {
+    render(<App />);
     const albumIdInput = screen.getByPlaceholderText(
       "Enter album id"
     ) as HTMLInputElement;
 
     await userEvent.type(albumIdInput, "2");
 
-    expect(albumIdInput).toBeDefined();
+    expect(albumIdInput).toBeInTheDocument();
     await waitFor(() => {
       expect(albumIdInput.value).toBe("2");
       const photosHeading = screen.getAllByRole("heading", { level: 2 })[0];
@@ -49,6 +52,7 @@ describe("App component", () => {
   });
 
   it("should not allow the album id to change with invalid input", async () => {
+    render(<App />);
     async function verifyAlbumIdHasNotChanged(keyboardInput: string) {
       const photosHeading = screen.getAllByRole("heading", {
         level: 2,
@@ -74,6 +78,7 @@ describe("App component", () => {
   });
 
   it("should update local storage with useEffect", async () => {
+    render(<App />);
     localStorage.setItem(
       "photos",
       JSON.stringify([
