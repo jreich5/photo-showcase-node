@@ -21,7 +21,7 @@ You can view a live version of the application [here](https://jreich5.github.io/
 
 ## Description
 
-This Photo Showcase demonstrates a React application with several technologies:
+This showcase demonstrates a React + TypeScript application with using several technologies:
 
 - [Node.js](https://nodejs.org/en) - the runtime environment
 - [npm](https://www.npmjs.com/) - dependency management
@@ -35,7 +35,14 @@ This Photo Showcase demonstrates a React application with several technologies:
 - [React Testing Library](https://testing-library.com/) - component and integration testing
 - [Cypress](https://www.cypress.io/) - end-to-end testing
 
-The project features test-driven custom validation for the album id input. The site is mobile-responsive using Tailwind CSS and custom CSS. The photo API data is stored in local storage for faster data retrieval and DOM loading.
+Notable features:
+
+- test-driven components
+- test-driven custom form validation for the album id input
+- mobile-responsive design
+- photo API data stored in local storage for faster data retrieval and DOM loading
+- use of `useMemo` to cache the calculated number of albums
+- end-to-end testing using Cypress
 
 ## Setup
 
