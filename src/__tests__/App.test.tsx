@@ -1,5 +1,6 @@
 import { render, screen, cleanup, waitFor } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
+import "@testing-library/jest-dom";
 import App from "../App";
 import { PhotoAPI } from "../PhotoAPI";
 import { photos1 } from "../mockPhotoAPIData";
@@ -24,14 +25,14 @@ describe("App component", () => {
     render(<App />);
     waitFor(() => {
       const h1Element = screen.getByRole("heading", { name: "Photo Showcase" });
-      expect(h1Element).toBeDefined();
+      expect(h1Element).toBeInTheDocument();
     });
   });
 
   it("should display a heading with album number 1", () => {
     render(<App />);
     const h2Element = screen.getByRole("heading", { name: "Album 1 Photos" });
-    expect(h2Element).toBeDefined;
+    expect(h2Element).toBeInTheDocument();
   });
 
   it("should allow the album id to change", async () => {
@@ -42,7 +43,7 @@ describe("App component", () => {
 
     await userEvent.type(albumIdInput, "2");
 
-    expect(albumIdInput).toBeDefined();
+    expect(albumIdInput).toBeInTheDocument();
     await waitFor(() => {
       expect(albumIdInput.value).toBe("2");
       const photosHeading = screen.getAllByRole("heading", { level: 2 })[0];
